@@ -1,7 +1,7 @@
 import sys, types
 import json
 import os
-from telegram import Update, ChatAction
+from telegram import Update, ChatAction, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, CallbackContext
 
 # Temporary fix for Python 3.13 (imghdr removed)
@@ -12,7 +12,7 @@ fake_imghdr.what = what
 sys.modules["imghdr"] = fake_imghdr
 
 # -------------------- CONFIG --------------------
-BOT_TOKEN = "7634622833:AAFNzDehovix8ThntvYrFq5SSV12l2Cr87o"  # <-- Replace with your Bot token
+BOT_TOKEN = "7634622833:AAFNzDehovix8ThntvYrFq5SSV12l2Cr87o"  # Replace with your Bot token
 OWNER_USERNAME = "shristi_offical"
 DATA_DIR = "bot_data"
 USERS_FILE = os.path.join(DATA_DIR, "users.json")
@@ -45,14 +45,13 @@ RATE_CHART = """🍒 𝐒𝐄𝐑𝐕𝐈𝐂𝐄𝐒
 💋My 15 Belowjob video       499₹
 
 👑Vip Group: t.me/shristie
-
 """
 
 CHANNEL_LINK = "https://t.me/+sbGBV04UN9QwN2Q1"  # Proof channel
 BRANDING = "\n\n🕶️ Powered by @shristi_offical"  # Small branding footer
 
 PAYMENT_UPI = "pt9497@ptyes"
-PAYMENT_INSTRUCTION_TEXT = f"Click the UPI ID to copy and send payment screenshot:\n{PAYMENT_UPI}"
+PAYMENT_INSTRUCTION_TEXT = f"Click the button below to copy UPI. Pay and send payment screenshot:"
 
 PAYMENT_KEYWORDS = [
     "paid", "payment", "txn", "upi", "transfer", "transfered",
@@ -94,8 +93,13 @@ def send_rate_chart(update: Update, context: CallbackContext):
     send_typing(update, context)
     update.message.reply_text(RATE_CHART + f"\nProofs here: {CHANNEL_LINK}" + BRANDING)
 
-def send_payment_instruction(update: Update):
-    update.message.reply_text(PAYMENT_INSTRUCTION_TEXT + BRANDING)
+def send_payment_instruction(update: Update, context: CallbackContext):
+    # Inline button for copyable UPI
+    keyboard = [
+        [InlineKeyboardButton(f"Copy UPI: {PAYMENT_UPI}", switch_inline_query_current_chat=PAYMENT_UPI)]
+    ]
+    reply_markup = InlineKeyboardMarkup(keyboard)
+    update.message.reply_text(PAYMENT_INSTRUCTION_TEXT + BRANDING, reply_markup=reply_markup)
 
 def forward_to_owner(update: Update, context: CallbackContext):
     owner_id = config.get("owner_id")
@@ -106,7 +110,7 @@ def forward_to_owner(update: Update, context: CallbackContext):
         context.bot.forward_message(chat_id=owner_id,
                                     from_chat_id=update.effective_chat.id,
                                     message_id=update.message.message_id)
-        update.message.reply_text(f"✅ Payment evidence forwarded to owner for verification.Also Contact Me: @{OWNER_USERNAME}" + BRANDING)
+        update.message.reply_text(f"✅ Payment evidence forwarded to owner for verification.Please share the screenshot here 👉 : @{OWNER_USERNAME}" + BRANDING)
     except Exception as e:
         update.message.reply_text("❌ Failed to forward to owner. Contact owner directly.")
         print("Forward failed:", e)
@@ -131,6 +135,7 @@ def setowner(update: Update, context: CallbackContext):
     else:
         update.message.reply_text("❌ You are not authorized to set owner.")
 
+# -------------------- Cyclic Message Handler --------------------
 def handle_cyclic_message(update: Update, context: CallbackContext):
     chat_id = str(update.effective_chat.id)
     user = users.get(chat_id, {"step": 1})
@@ -143,7 +148,7 @@ def handle_cyclic_message(update: Update, context: CallbackContext):
 
     # Step 2: Payment instruction
     elif step == 2:
-        send_payment_instruction(update)
+        send_payment_instruction(update, context)
         users[chat_id]["step"] = 3
 
     # Step 3: Forward payment proof
@@ -153,7 +158,7 @@ def handle_cyclic_message(update: Update, context: CallbackContext):
         else:
             update.message.reply_text("Please send your payment proof (text/photo).")
             return
-        users[chat_id]["step"] = 1  # reset cycle
+        users[chat_id]["step"] = 1  # Reset cycle
 
     save_json(USERS_FILE, users)
 
