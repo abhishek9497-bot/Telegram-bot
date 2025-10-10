@@ -50,12 +50,12 @@ RATE_CHART = """🍒 𝐒𝐄𝐑𝐕𝐈𝐂𝐄𝐒
 CHANNEL_LINK = "https://t.me/+sbGBV04UN9QwN2Q1"  # Proof channel
 BRANDING = "\n\n🕶️ Powered by @shristi_offical"  # Small branding footer
 
-PAYMENT_INSTRUCTION = (
-   "💳 If you want any service, please make the payment to this UPI ID:\n"
-    "`pt9497@ptyes`\n\n"
-    "After payment, send the *screenshot here.*"
+PAYMENT_UPI = "pt9497@ptyes"
+PAYMENT_INSTRUCTION_TEXT = (
+    f"💰 Send payment to the UPI below:\n\n"
+    f"```{PAYMENT_UPI}```\n\n"
+    f"📸 After payment, send the screenshot here.\n"
 )
-
 
 PAYMENT_KEYWORDS = [
     "paid", "payment", "txn", "upi", "transfer", "transfered",
