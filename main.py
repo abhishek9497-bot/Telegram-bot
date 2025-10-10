@@ -1,6 +1,3 @@
-# Telegram-bot
-
-# Temporary fix for python-telegram-bot on Python 3.13 (imghdr removed)
 import sys, types
 fake_imghdr = types.ModuleType("imghdr")
 def what(file, h=None):
@@ -8,46 +5,65 @@ def what(file, h=None):
 fake_imghdr.what = what
 sys.modules["imghdr"] = fake_imghdr
 
-
-"""
-Telegram Payment-forwarding Bot for Android (PyDroid3)
-Uses python-telegram-bot v13.15 (synchronous, Updater/Dispatcher)
-Author: (you)
-"""
-import fix_urllib3
 import json
 import os
-from telegram import Update
+from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, CallbackContext
 
-# -------------------- CONFIG: Replace these before running --------------------
-BOT_TOKEN = "7634622833:AAG3Y_MnSANKnlN3E2GBf2XCQ49kMBefR-0"   # <-- Replace with token from @BotFather
-OWNER_USERNAME = "shristi_offical"  # <-- WITHOUT the leading @, e.g. "Abhishek123"
-DATA_DIR = "bot_data"   # directory to store JSONs
+# -------------------- CONFIG --------------------
+BOT_TOKEN = "7634622833:AAG3Y_MnSANKnlN3E2GBf2XCQ49kMBefR-0"
+OWNER_USERNAME = "shristi_offical"
+DATA_DIR = "bot_data"
 USERS_FILE = os.path.join(DATA_DIR, "users.json")
 CONFIG_FILE = os.path.join(DATA_DIR, "config.json")
-# ------------------------------------------------------------------------------
 
-# Default payment instruction (change if you want)
-PAYMENT_INSTRUCTION = (
-    "If you want any service, please make the payment to this UPI ID: pt9497@ptyes "
-    "and send the payment screenshot here."
-)
+PAYMENT_INSTRUCTION_TEXT = "Click the button below to copy our UPI and make payment and send screenshot:"
+RATE_CHART = """🍒 𝐒𝐄𝐑𝐕𝐈𝐂𝐄𝐒 
 
-WELCOME_MESSAGE = (
-    "Welcome! 👋\n\n"
-    "Thank you for contacting our shop. Below is our rate chart:\n"
-    "— *Replace this with your actual rate chart text later*\n\n"
-    "Send me a message if you're interested."
-)
+✅20 Nude Pics = 199₹ 
+✅10 Nude Video = 199₹
+✅10 my sex video = 399₹
+✅30 nude pic + 15 video = 299₹
+✅50 Pics + 30 Videos = 499₹
 
-# Keywords to auto-detect payment messages (lowercase)
+✅ 𝐅𝐮𝐥𝐥 𝐛𝐨𝐝𝐲 𝐞𝐱𝐩𝐨𝐬𝐮𝐫𝐞 𝐩𝐚𝐜𝐤 😎 : 50 Nude Pics + 40 Nude Videos + 30 sex video = 899₹ 
+
+
+💕 𝐕𝐢𝐝𝐞𝐨 𝐂𝐚𝐥𝐥 𝐑𝐨𝐦𝐚𝐧𝐜𝐞 👣
+
+🏪10 minutes = ₹499
+🏪20 minutes = ₹899
+
+
+💙𝐌𝐘 𝐅𝐀𝐕𝐎𝐑𝐈𝐓𝐄 🥵
+
+✅𝐒𝐄𝐗 𝐂𝐇𝐀𝐓 = 299₹(10min+10nude)
+✅𝐒𝐄𝐗 𝐂𝐇𝐀𝐓 𝐖𝐈𝐓𝐇 𝐍𝐔𝐃𝐄𝐒 = 399₹ ( 20min)
+😀𝐒𝐄𝐗 𝐂𝐇𝐀𝐓 𝐖𝐈𝐓𝐇 𝐔𝐍𝐋𝐈𝐌𝐈𝐓𝐄𝐃 𝐍𝐔𝐃𝐄𝐒 = ₹799 ( 30 min ) 
+
+𝐓𝐲𝐩𝐞 𝐨𝐟 𝐯𝐢𝐝𝐞𝐨𝐬 𝐲𝐨𝐮 𝐰𝐚𝐧𝐭 💃
+❤️My 10 dildo inside Video   299₹
+🔥My 10 fingering video        299₹
+😍My 15 my hard sex video   499₹
+😀My 15 boobs show video    499₹
+💋My 15 Belowjob video       499₹
+
+
+👑Vip Group: t.me/shristie
+
+🔈𝐍𝐎𝐓𝐄 :-
+𝗜𝗳 𝘆𝗼𝘂 𝗱𝗼𝗻'𝘁 𝘁𝗿𝘂𝘀𝘁 𝗺𝗲, 𝘆𝗼𝘂 𝗺𝗮𝘆 𝗹𝗲𝗮𝘃𝗲! 
+
+               ✅  𝙉𝙊 𝙍𝙀𝘼𝙇 𝙈𝙀𝙀𝙏  ✅ ... ...
+"""
+PAYMENT_UPI = "pt9497@ptyes"
+
 PAYMENT_KEYWORDS = [
-    "paid", "payment", "txn", "upi", "transfer", "transfered", "transfered",
+    "paid", "payment", "txn", "upi", "transfer", "transfered",
     "screenshot", "txid", "tx", "paid to", "done"
 ]
 
-# -------------------- Helper functions for storage --------------------
+# -------------------- Helper --------------------
 def ensure_data_dir():
     if not os.path.exists(DATA_DIR):
         os.makedirs(DATA_DIR)
@@ -65,44 +81,61 @@ def save_json(path, data):
     with open(path, "w", encoding="utf-8") as f:
         json.dump(data, f, indent=2, ensure_ascii=False)
 
-# -------------------- Load/create storage files --------------------
+# -------------------- Storage --------------------
 ensure_data_dir()
-users = load_json(USERS_FILE, {})    # structure: { "<chat_id>": {"first_seen": "YYYY-MM-DD", ...} }
-config = load_json(CONFIG_FILE, {})  # structure: { "owner_id": 123456789 }
+users = load_json(USERS_FILE, {})
+config = load_json(CONFIG_FILE, {})
 
-# -------------------- Utility: detect payment-like message --------------------
 def looks_like_payment_message(update: Update) -> bool:
-    # Photo or document => likely a screenshot
     if update.message.photo or update.message.document:
         return True
-    # Text containing payment keywords
     text = (update.message.text or "").lower()
     for kw in PAYMENT_KEYWORDS:
         if kw in text:
             return True
     return False
 
-# -------------------- Command: /start --------------------
+# -------------------- Messages --------------------
+def send_rate_chart(update: Update):
+    update.message.reply_text(RATE_CHART)
+
+def send_payment_instruction(update: Update):
+    keyboard = [[
+        InlineKeyboardButton(f"Copy UPI: {PAYMENT_UPI}", switch_inline_query_current_chat=PAYMENT_UPI)
+    ]]
+    reply_markup = InlineKeyboardMarkup(keyboard)
+    update.message.reply_text(PAYMENT_INSTRUCTION_TEXT, reply_markup=reply_markup)
+
+def forward_to_owner(update: Update, context: CallbackContext):
+    owner_id = config.get("owner_id")
+    if not owner_id:
+        update.message.reply_text(
+            "Owner not set. Owner please run /setowner."
+        )
+        return
+    try:
+        context.bot.forward_message(
+            chat_id=owner_id,
+            from_chat_id=update.effective_chat.id,
+            message_id=update.message.message_id
+        )
+        update.message.reply_text("✅ Your Payment evidence forwarded to owner for verification and also share the screenshot here 👇 @shristi_offical.")
+    except Exception as e:
+        update.message.reply_text("❌ Failed to forward to owner. Contact owner directly.")
+        print("Forward failed:", e)
+
+# -------------------- /start command --------------------
 def start(update: Update, context: CallbackContext):
     chat_id = str(update.effective_chat.id)
     if chat_id not in users:
-        # First time user
-        users[chat_id] = {"first_seen": update.message.date.isoformat()}
+        users[chat_id] = {"step": 1}
         save_json(USERS_FILE, users)
-
-        # Send welcome + rate chart
-        update.message.reply_text(WELCOME_MESSAGE, parse_mode="Markdown")
+        send_rate_chart(update)
     else:
-        # Returning user -> give payment instruction
-        update.message.reply_text(PAYMENT_INSTRUCTION)
+        handle_cyclic_message(update, context)
 
-# -------------------- Command: /setowner --------------------
+# -------------------- /setowner command --------------------
 def setowner(update: Update, context: CallbackContext):
-    """
-    This command sets the owner chat id automatically, but it only works if the
-    Telegram username of the person issuing this command matches OWNER_USERNAME
-    you put in the config above. This prevents others from hijacking.
-    """
     sender_username = update.effective_user.username or ""
     if sender_username.lower() == OWNER_USERNAME.lower():
         owner_id = update.effective_chat.id
@@ -113,48 +146,43 @@ def setowner(update: Update, context: CallbackContext):
     else:
         update.message.reply_text("❌ You are not authorized to set owner. Username mismatch.")
 
-# -------------------- Command: /whoami (optional) --------------------
-def whoami(update: Update, context: CallbackContext):
-    update.message.reply_text(f"Your chat id is: {update.effective_chat.id}\nYour username: @{update.effective_user.username}")
+# -------------------- Cyclic message handler --------------------
+def handle_cyclic_message(update: Update, context: CallbackContext):
+    chat_id = str(update.effective_chat.id)
+    user = users.get(chat_id, {"step": 1})
+
+    step = user.get("step", 1)
+
+    # Step 1: Rate chart
+    if step == 1:
+        send_rate_chart(update)
+        users[chat_id]["step"] = 2
+
+    # Step 2: Payment instruction
+    elif step == 2:
+        send_payment_instruction(update)
+        users[chat_id]["step"] = 3
+
+    # Step 3: Forward payment proof
+    elif step == 3:
+        if looks_like_payment_message(update):
+            forward_to_owner(update, context)
+        else:
+            update.message.reply_text("Please send your payment proof (text/photo).")
+            return
+        users[chat_id]["step"] = 1  # Reset cycle to 1
+
+    save_json(USERS_FILE, users)
 
 # -------------------- Generic message handler --------------------
 def handle_message(update: Update, context: CallbackContext):
     chat_id = str(update.effective_chat.id)
-    # If first time contact (no /start), treat similarly:
     if chat_id not in users:
-        users[chat_id] = {"first_seen": update.message.date.isoformat()}
+        users[chat_id] = {"step": 1}
         save_json(USERS_FILE, users)
-        update.message.reply_text(WELCOME_MESSAGE, parse_mode="Markdown")
-        return
+    handle_cyclic_message(update, context)
 
-    # If message looks like payment evidence (photo/document or payment text)
-    if looks_like_payment_message(update):
-        # Grab owner id from config
-        owner_id = config.get("owner_id")
-        if not owner_id:
-            update.message.reply_text(
-                "Thanks — I received your message. But owner chat id is not set yet. "
-                "Please ask the owner to run /setowner in this bot (owner uses their account)."
-            )
-            return
-
-        # Forward the actual message (photo/text/document) to owner
-        try:
-            context.bot.forward_message(
-                chat_id=owner_id,
-                from_chat_id=update.effective_chat.id,
-                message_id=update.message.message_id
-            )
-            update.message.reply_text("✅ Thank you. Your payment evidence has been forwarded for verification   so please share the screenshot of payment here 👉 @shristi_offical.")
-        except Exception as e:
-            update.message.reply_text("❌ Failed to forward to owner. Please contact owner directly owner user id : @shristi_offical.")
-            print("Forward failed:", e)
-        return
-
-    # Default: ask to pay (second message and onward)
-    update.message.reply_text(PAYMENT_INSTRUCTION)
-
-# -------------------- Main: run the bot --------------------
+# -------------------- Main --------------------
 def main():
     if BOT_TOKEN == "YOUR_BOT_TOKEN_HERE":
         print("ERROR: Please set BOT_TOKEN in the code.")
@@ -163,12 +191,8 @@ def main():
     updater = Updater(token=BOT_TOKEN, use_context=True)
     dp = updater.dispatcher
 
-    # Command handlers
     dp.add_handler(CommandHandler("start", start))
     dp.add_handler(CommandHandler("setowner", setowner))
-    dp.add_handler(CommandHandler("whoami", whoami))
-
-    # Message handler for all text/photos/documents
     dp.add_handler(MessageHandler(Filters.all & (~Filters.command), handle_message))
 
     print("Bot started. Press Ctrl+C to stop.")
