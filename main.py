@@ -11,7 +11,7 @@ from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, CallbackContext
 
 # -------------------- CONFIG --------------------
-BOT_TOKEN = "7634622833:AAG3Y_MnSANKnlN3E2GBf2XCQ49kMBefR-0"
+BOT_TOKEN = "7634622833:AAFNzDehovix8ThntvYrFq5SSV12l2Cr87o"
 OWNER_USERNAME = "shristi_offical"
 DATA_DIR = "bot_data"
 USERS_FILE = os.path.join(DATA_DIR, "users.json")
