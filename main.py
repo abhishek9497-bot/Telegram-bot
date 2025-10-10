@@ -12,7 +12,7 @@ fake_imghdr.what = what
 sys.modules["imghdr"] = fake_imghdr
 
 # -------------------- CONFIG --------------------
-BOT_TOKEN = "YOUR_BOT_TOKEN_HERE"  # <-- Replace with your Bot token
+BOT_TOKEN = "7634622833:AAFNzDehovix8ThntvYrFq5SSV12l2Cr87o"  # <-- Replace with your Bot token
 OWNER_USERNAME = "shristi_offical"
 DATA_DIR = "bot_data"
 USERS_FILE = os.path.join(DATA_DIR, "users.json")
@@ -48,8 +48,8 @@ RATE_CHART = """🍒 𝐒𝐄𝐑𝐕𝐈𝐂𝐄𝐒
 
 """
 
-CHANNEL_LINK = "https://t.me/shristie_proofs"  # Proof channel
-BRANDING = "\n\n🕶️ Powered by @Business_Wallaa"  # Small branding footer
+CHANNEL_LINK = "https://t.me/+sbGBV04UN9QwN2Q1"  # Proof channel
+BRANDING = "\n\n🕶️ Powered by @shristi_offical"  # Small branding footer
 
 PAYMENT_UPI = "pt9497@ptyes"
 PAYMENT_INSTRUCTION_TEXT = f"Click the UPI ID to copy and send payment screenshot:\n{PAYMENT_UPI}"
@@ -106,7 +106,7 @@ def forward_to_owner(update: Update, context: CallbackContext):
         context.bot.forward_message(chat_id=owner_id,
                                     from_chat_id=update.effective_chat.id,
                                     message_id=update.message.message_id)
-        update.message.reply_text(f"✅ Payment evidence forwarded to owner for verification. Contact: @{OWNER_USERNAME}" + BRANDING)
+        update.message.reply_text(f"✅ Payment evidence forwarded to owner for verification.Also Contact Me: @{OWNER_USERNAME}" + BRANDING)
     except Exception as e:
         update.message.reply_text("❌ Failed to forward to owner. Contact owner directly.")
         print("Forward failed:", e)
