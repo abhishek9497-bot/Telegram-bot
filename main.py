@@ -57,6 +57,10 @@ PAYMENT_INSTRUCTION_TEXT = (
     f"📸 After payment, send the screenshot here.\n"
 )
 
+def send_payment_instruction(update: Update):
+    update.message.reply_text(PAYMENT_INSTRUCTION_TEXT + BRANDING, parse_mode="Markdown")
+    
+
 PAYMENT_KEYWORDS = [
     "paid", "payment", "txn", "upi", "transfer", "transfered",
     "screenshot", "txid", "tx", "paid to", "done"
