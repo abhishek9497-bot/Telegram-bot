@@ -1,10 +1,18 @@
 # fix_urllib3.py
-# This patch prevents urllib3.contrib.appengine import errors in python-telegram-bot 13.x
+# Patch to prevent urllib3.contrib.appengine errors in python-telegram-bot 13.x
 
 import sys, types
 
-# Create a fake module so that telegram.ext can import it without crashing
+# Create a fake module
 fake_appengine = types.ModuleType("urllib3.contrib.appengine")
+
+# Add fake attributes used by python-telegram-bot
+def is_appengine_sandbox():
+    return False
+
+fake_appengine.is_appengine_sandbox = is_appengine_sandbox
+
+# Register this fake module
 sys.modules["urllib3.contrib.appengine"] = fake_appengine
 
-print("✅ urllib3.contrib.appengine module patched successfully")
+print("✅ urllib3.contrib.appengine module patched successfully with is_appengine_sandbox")
