@@ -14,7 +14,7 @@ Telegram Payment-forwarding Bot for Android (PyDroid3)
 Uses python-telegram-bot v13.15 (synchronous, Updater/Dispatcher)
 Author: (you)
 """
-
+import fix_urllib3
 import json
 import os
 from telegram import Update
