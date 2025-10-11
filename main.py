@@ -51,61 +51,6 @@ RATE_CHART = """🍒 𝐒𝐄𝐑𝐕𝐈𝐂𝐄𝐒
 """
 
 CHANNEL_LINK = "https://t.me/+sbGBV04UN9QwN2Q1"  # Proof channel
-BRANDING = "\n\n🕶️ Powered Isse pure code me vo line replace karke do
-
-import sys, types
-import json
-import os
-from telegram import Update, ChatAction
-from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, CallbackContext
-
-Temporary fix for Python 3.13 (imghdr removed)
-
-fake_imghdr = types.ModuleType("imghdr")
-def what(file, h=None):
-return None
-fake_imghdr.what = what
-sys.modules["imghdr"] = fake_imghdr
-
--------------------- CONFIG --------------------
-
-BOT_TOKEN = "7634622833:AAFNzDehovix8ThntvYrFq5SSV12l2Cr87o"  # <-- Replace with your Bot token
-OWNER_USERNAME = "shristi_offical"
-DATA_DIR = "bot_data"
-USERS_FILE = os.path.join(DATA_DIR, "users.json")
-CONFIG_FILE = os.path.join(DATA_DIR, "config.json")
-
-RATE_CHART = """🍒 𝐒𝐄𝐑𝐕𝐈𝐂𝐄𝐒
-
-✅20 Nude Pics = 199₹
-✅10 Nude Video = 199₹
-✅10 my sex video = 399₹
-✅30 nude pic + 15 video = 299₹
-✅50 Pics + 30 Videos = 499₹
-
-✅ Full body exposure pack 😎 : 50 Nude Pics + 40 Nude Videos + 30 sex video = 899₹
-
-💕 Video Call Romance 👣
-🏪10 minutes = ₹499
-🏪20 minutes = ₹899
-
-💙MY FAVORITE 🥵
-✅SEX CHAT = 299₹(10min+10nude)
-✅SEX CHAT WITH NUDES = 399₹ (20min)
-😀SEX CHAT WITH UNLIMITED NUDES = ₹799 (30 min)
-
-📸 Type of videos you want 💃
-❤️My 10 dildo inside Video   299₹
-🔥My 10 fingering video        299₹
-😍My 15 my hard sex video   499₹
-😀My 15 boobs show video    499₹
-💋My 15 Belowjob video       499₹
-
-👑Vip Group: t.me/shristie
-
-"""
-
-CHANNEL_LINK = "https://t.me/+sbGBV04UN9QwN2Q1"  # Proof channel
 BRANDING = "\n\n🕶️ Powered by @shristi_offical"  # Small branding footer
 
 PAYMENT_UPI = "pt9497@ptyes"
