@@ -38,9 +38,18 @@ RATE_CHART = """🍒 𝐒𝐄𝐑𝐕𝐈𝐂𝐄𝐒
 ✅ 𝐒𝐄𝐗 𝐂𝐇𝐀𝐓 𝐖𝐈𝐓𝐇 𝐍𝐔𝐃𝐄𝐒 = ₹399 (20min)
 ✅ 𝐒𝐄𝐗 𝐂𝐇𝐀𝐓 𝐖𝐈𝐓𝐇 𝐔𝐍𝐋𝐈𝐌𝐈𝐓𝐄𝐃 𝐍𝐔𝐃𝐄𝐒 = ₹799 (30min)
 
+𝐓𝐲𝐩𝐞 𝐨𝐟 𝐯𝐢𝐝𝐞𝐨𝐬 𝐲𝐨𝐮 𝐰𝐚𝐧𝐭 💃
+❤️My 10 dildo inside Video   299₹
+🔥My 10 fingering video        299₹
+😍My 15 my hard sex video   499₹
+😀My 15 boobs show video    499₹
+💋My 15 Belowjob video       499₹
+
 👑 VIP Group: t.me/shristie
 
-🕶️ Powered by @shristi_offical
+For proof t.me/+sbGBV04UN9QwN2Q1
+
+🕶️ Owned by @shristi_offical
 """
 
 PAYMENT_INSTRUCTION = (
