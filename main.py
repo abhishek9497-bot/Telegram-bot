@@ -4,7 +4,6 @@ import os
 from telegram import Update, ChatAction
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, CallbackContext
 
-Temporary fix for Python 3.13 (imghdr removed)
 
 fake_imghdr = types.ModuleType("imghdr")
 def what(file, h=None):
