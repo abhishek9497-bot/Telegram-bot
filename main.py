@@ -9,8 +9,8 @@ fake_imghdr.what = what
 sys.modules["imghdr"] = fake_imghdr
 
 # -------------------- CONFIG --------------------
-BOT_TOKEN = "7634622833:AAFNzDehovix8ThntvYrFq5SSV12l2Cr87o"
-OWNER_USERNAME = "shristi_offical"
+BOT_TOKEN = "8435196961:AAHsJI-a09w8p8rXKBdPPv2psW-fJf7IzWs"
+OWNER_USERNAME = "@Sexy_Kashishh"
 DATA_DIR = "bot_data"
 USERS_FILE = os.path.join(DATA_DIR, "users.json")
 CONFIG_FILE = os.path.join(DATA_DIR, "config.json")
@@ -18,38 +18,31 @@ QR_CODE_FILE = os.path.join(DATA_DIR, "upi_qr.png")
 
 PAYMENT_UPI = "pt9497@ptyes"
 
-RATE_CHART = """🍒 𝐒𝐄𝐑𝐕𝐈𝐂𝐄𝐒 
+RATE_CHART = """✅20 nude pics = 199₹
+✅50 Nude Pics = 299₹ 
+✅10 Nude Video = 299₹
+✅10 my sex video = 399₹
+✅50 Pics + 10 Videos = 499₹
 
-✅ 20 Nude Pics = 199₹ 
-✅ 10 Nude Video = 199₹
-✅ 10 my sex video = 399₹
-✅ 30 nude pic + 15 video = 299₹
-✅ 50 Pics + 30 Videos = 499₹
+💌 𝐅𝐮𝐥𝐥 𝐛𝐨𝐝𝐲 𝐞𝐱𝐩𝐨𝐬𝐮𝐫𝐞 𝐩𝐚𝐜𝐤 😀 : 50 Nude Pics + 10 Nude Videos + 10 sex video = 899₹ 
 
-✅ 𝐅𝐮𝐥𝐥 𝐛𝐨𝐝𝐲 𝐩𝐚𝐜𝐤 😎 
-50 Nude Pics + 40 Nude Videos + 30 sex video = 899₹ 
+🔥 𝐕𝐢𝐝𝐞𝐨 𝐂𝐚𝐥𝐥 𝐑𝐨𝐦𝐚𝐧𝐜𝐞 💋
+😀7 minutes = ₹699
+🏪10 minutes = ₹999
 
-💕 𝐕𝐢𝐝𝐞𝐨 𝐂𝐚𝐥𝐥 𝐑𝐨𝐦𝐚𝐧𝐜𝐞 👣
-🏪 10 min = ₹499
-🏪 20 min = ₹899
+✨ Audio Call  ☄️
+15 minutes = ₹499
+30 minutes = ₹799
 
-💙 𝐌𝐘 𝐅𝐀𝐕𝐎𝐑𝐈𝐓𝐄 🥵
-✅ 𝐒𝐄𝐗 𝐂𝐇𝐀𝐓 = ₹299 (10min + 10nude)
-✅ 𝐒𝐄𝐗 𝐂𝐇𝐀𝐓 𝐖𝐈𝐓𝐇 𝐍𝐔𝐃𝐄𝐒 = ₹399 (20min)
-✅ 𝐒𝐄𝐗 𝐂𝐇𝐀𝐓 𝐖𝐈𝐓𝐇 𝐔𝐍𝐋𝐈𝐌𝐈𝐓𝐄𝐃 𝐍𝐔𝐃𝐄𝐒 = ₹799 (30min)
+✅𝐒𝐄𝐗 𝐂𝐇𝐀𝐓 = 299₹ ( 10min)
+✅𝐒𝐄𝐗 𝐂𝐇𝐀𝐓 𝐖𝐈𝐓𝐇 𝐍𝐔𝐃𝐄𝐒 = 399₹ ( 10min)
+✅𝐒𝐄𝐗 𝐂𝐇𝐀𝐓 𝐖𝐈𝐓𝐇 𝐔𝐍𝐋𝐈𝐌𝐈𝐓𝐄𝐃 𝐍𝐔𝐃𝐄𝐒 = ₹999 ( 20 min ) 
 
-𝐓𝐲𝐩𝐞 𝐨𝐟 𝐯𝐢𝐝𝐞𝐨𝐬 𝐲𝐨𝐮 𝐰𝐚𝐧𝐭 💃
-❤️My 10 dildo inside Video   299₹
-🔥My 10 fingering video        299₹
-😍My 15 my hard sex video   499₹
-😀My 15 boobs show video    499₹
-💋My 15 Belowjob video       499₹
 
-👑 VIP Group: t.me/shristie
+🔴𝐍𝐎𝐓𝐄 :-
+𝗜𝗳 𝘆𝗼𝘂 𝗱𝗼𝗻'𝘁 𝘁𝗿𝘂𝘀𝘁 𝗺𝗲, 𝘆𝗼𝘂 𝗺𝗮𝘆 𝗹𝗲𝗮𝘃𝗲! 
 
-For proof t.me/+sbGBV04UN9QwN2Q1
-
-🕶️ Owned by @shristi_offical
+               ⚠️   𝙉𝙊 𝙍𝙀𝘼𝙇 𝙈𝙀𝙀𝙏  ⚠️
 """
 
 PAYMENT_INSTRUCTION = (
