@@ -10,7 +10,7 @@ sys.modules["imghdr"] = fake_imghdr
 
 # -------------------- CONFIG --------------------
 BOT_TOKEN = "8435196961:AAHsJI-a09w8p8rXKBdPPv2psW-fJf7IzWs"
-OWNER_USERNAME = "@Sexy_Kashishh"
+OWNER_USERNAME = "Sexy_Kashishh"
 DATA_DIR = "bot_data"
 USERS_FILE = os.path.join(DATA_DIR, "users.json")
 CONFIG_FILE = os.path.join(DATA_DIR, "config.json")
@@ -19,7 +19,7 @@ QR_CODE_FILE = os.path.join(DATA_DIR, "upi_qr.png")
 PAYMENT_UPI = "pt9497@ptyes"
 
 RATE_CHART = """✅20 nude pics = 199₹
-✅50 Nude Pics = 299₹ 
+50 Nude Pics = 299₹ 
 ✅10 Nude Video = 299₹
 ✅10 my sex video = 399₹
 ✅50 Pics + 10 Videos = 499₹
